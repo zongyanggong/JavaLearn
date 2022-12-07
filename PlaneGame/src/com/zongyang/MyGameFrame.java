@@ -6,6 +6,9 @@ import java.awt.event.WindowEvent;
 
 public class MyGameFrame extends Frame{
 
+    Image bg = GameUtil.getImage("images/bg.jpg");
+    Image plane = GameUtil.getImage("images/plane.png");
+
     // Init frame
     public void launchFrame(){
         this.setTitle("Plane Game");
@@ -24,8 +27,17 @@ public class MyGameFrame extends Frame{
 
     }
 
+    @Override
+    public void paint(Graphics g) {
+        g.drawImage(bg,0,0,500,500,null);
+        g.drawImage(plane,200,200,30,30,null);
+
+    }
+
     public static void main(String[] args) {
         MyGameFrame myGameFrame = new MyGameFrame();
         myGameFrame.launchFrame();
     }
+
+
 }
