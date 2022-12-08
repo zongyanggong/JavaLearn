@@ -3,16 +3,18 @@ package com.zongyang;
 import java.awt.*;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import static com.zongyang.GameUtil.*;
 
-public class MyGameFrame extends Frame{
+public class MyGameFrame extends Frame {
 
     Image bg = GameUtil.getImage("images/bg.jpg");
     Image plane = GameUtil.getImage("images/plane.png");
+    int x = 200, y = 200;
 
     // Init frame
-    public void launchFrame(){
+    public void launchFrame() {
         this.setTitle("Plane Game");
-        this.setSize(500, 500);
+        this.setSize(FRAME_WIDTH, FRAME_HEIGHT);
         this.setVisible(true);
         this.setLocation(300, 300);
 
@@ -24,14 +26,29 @@ public class MyGameFrame extends Frame{
 
             }
         });
+        new GameThread().run();
+    }
 
+    class GameThread extends Thread {
+        @Override
+        public void run() {
+            while (true) {
+                repaint();
+                try {
+                    sleep(40);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+            }
+        }
     }
 
     @Override
     public void paint(Graphics g) {
-        g.drawImage(bg,0,0,500,500,null);
-        g.drawImage(plane,200,200,30,30,null);
-
+        g.drawImage(bg, 0, 0, FRAME_WIDTH, FRAME_HEIGHT, null);
+        g.drawImage(plane, x, y, 30, 30, null);
+        x -= 3;
+        y -= 3;
     }
 
     public static void main(String[] args) {
@@ -39,5 +56,14 @@ public class MyGameFrame extends Frame{
         myGameFrame.launchFrame();
     }
 
+    private Image offScreenImage = null;
 
+    @Override
+    public void update(Graphics g) {
+        if (offScreenImage == null)
+            offScreenImage = this.createImage(FRAME_WIDTH, FRAME_HEIGHT);
+        Graphics gOff = offScreenImage.getGraphics();
+        paint(gOff);
+        g.drawImage(offScreenImage, 0, 0, null);
+    }
 }
