@@ -17,5 +17,10 @@ public class TestGenericsMethod {
         System.out.println(GenericsMethod.getFlag("admin3"));
         System.out.println(GenericsMethod.getFlag(123454));
 
+        String[] attr = new String[] {"a", "b", "c"};
+        genericsMethod.method(attr);
+        Integer[] attr2 = new Integer[] {1,2,3,4};
+        genericsMethod.method(attr2);
+
     }
 }

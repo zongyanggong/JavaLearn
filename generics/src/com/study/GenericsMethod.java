@@ -16,4 +16,10 @@ public class GenericsMethod {
     public static <T> T getFlag(T flag) {
         return flag;
     }
+
+    public <T> void method(T... args) {
+        for (T t:args) {
+            System.out.println(t);
+        }
+    }
 }
