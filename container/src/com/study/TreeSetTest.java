@@ -27,5 +27,20 @@ public class TreeSetTest {
         for (Users users:set1){
             System.out.println(users);
         }
+
+        System.out.println("------------------");
+        Set<Student> set2 = new TreeSet<>(new StudentComparator());
+        Student s1 = new Student("zhangsan",20);
+        Student s2 = new Student("lisi", 18);
+        Student s3 = new Student("wangwu",18);
+        Student s4 = new Student("zhangliu", 15);
+        set2.add(s1);
+        set2.add(s2);
+        set2.add(s3);
+        set2.add(s4);
+        for (Student student:set2) {
+            System.out.println(student);
+        }
+
     }
 }
