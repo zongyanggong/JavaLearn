@@ -11,7 +11,8 @@ public class CollectionsSortTest {
         list.add("b");
         list.add("a");
         list.add("d");
-        Collections.sort(list);
+//        Collections.sort(list); //升序
+        Collections.sort(list,Collections.reverseOrder()); //降序
         for (String str:list)
             System.out.println(str);
 
